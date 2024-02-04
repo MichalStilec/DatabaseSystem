@@ -196,4 +196,4 @@ public static string Import(SqlConnection connection, string table, string file)
 ```
 
 ## Závěr
-- Tento kódový soubor umožňuje efektivní práci s databází a poskytuje uživateli různé možnosti manipulace s daty. Je navržen tak, aby byl přehledný a snadno rozšiřitelný o další funkcionalitu.
+- Tento projekt umožňuje efektivní práci s databází a poskytuje uživateli různé možnosti manipulace s daty. Je navržen tak, aby byl přehledný a snadno rozšiřitelný o další funkcionalitu.
