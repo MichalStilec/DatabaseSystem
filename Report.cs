@@ -9,7 +9,10 @@ namespace DatabaseSystem
 {
     public class Report
     {
-        public static void GenerateReport(SqlConnection connection)
+        /// <summary>
+        /// Vypíše informace z tabulek Vezen, Bachar a Veznice
+        /// </summary>
+        public static void VygenerujReport(SqlConnection connection)
         {
             string select = "Vezen";
             connection.Open();
@@ -22,6 +25,8 @@ namespace DatabaseSystem
                 Console.WriteLine("{0,35}", $"{select}");
 
                 Console.WriteLine(new string('-', 76));
+
+                // Každý select má jiný druh výpisu kvůli různosti atributů
                 if (select == "Vezen")
                 {
                     Console.WriteLine("{0,-15} | {1,-20} | {2,-15} | {3,-10}", "Jmeno", "Prijmeni", "Datum narozeni", "Vyska");
@@ -59,6 +64,8 @@ namespace DatabaseSystem
                 Console.WriteLine(new string('-', 76) + "\n");
                 reader.Close();
 
+                // Nebylo nutné vytvářet novou metodu pro každou tabulku,
+                // takže se mění po každým vypsaným selectu
                 if (select == "Vezen")
                 {
                     select = "Bachar";

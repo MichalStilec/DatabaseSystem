@@ -12,8 +12,10 @@ namespace DatabaseSystem
     {
         static void Main(string[] args)
         {
+            // Povolí programu používat háčky a čárky
             Console.OutputEncoding = Encoding.UTF8;
 
+            // Zde se načte veškerý config
             Config config = new Config();
             string source = config.LoadDataSource(); string catalog = config.LoadCatalog(); 
             string user = config.LoadUser(); string passwrd = config.LoadPassword();
@@ -24,6 +26,7 @@ namespace DatabaseSystem
             {
                 try
                 {
+                    // Zde se program zkusí poprvé připojit do databáze
                     connection.Open();
                     bool end = false;
                     Console.WriteLine("Program se úspěšně připojil do databáze " + catalog + "\n");
@@ -31,6 +34,7 @@ namespace DatabaseSystem
 
                     while (!end)
                     {
+                        // Hlavní menu programu
                         Console.WriteLine("---      Alpha.3      ---\n" +
                                           "Vyberte jednu z možností: \n" +
                                           "1. Možnosti tabulky Vězeň \n" +
@@ -119,7 +123,7 @@ namespace DatabaseSystem
 
                             case "2":
                                 Console.Clear();
-                                Report.GenerateReport(connection);
+                                Report.VygenerujReport(connection);
                                 Console.WriteLine("Stiskněte libovolné tlačítko pro pokračování");
                                 Console.ReadKey(true);
                                 Console.Clear();

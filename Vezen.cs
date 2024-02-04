@@ -9,11 +9,16 @@ namespace DatabaseSystem
 {
     public class Vezen
     {
+        /// <summary>
+        /// Vloží do databáze nového vězně společně s automaticky vytvořeným 
+        /// trestem vězně, který má nastavenou délku na 1 rok
+        /// </summary>
         public static void VlozVezne(SqlConnection connection, string jmeno, string prijmeni, DateTime datum, double vyska)
         {
             Random r = new Random();
             connection.Open();
 
+            // Začne transakci pro přidání dvou záznamů do dvou různých tabulek
             SqlTransaction transaction = connection.BeginTransaction("VlozVezneTransaction");
 
             try
@@ -37,7 +42,6 @@ namespace DatabaseSystem
                 insertTrest.Parameters.AddWithValue("@Trest_dan_do", DateTime.Now.AddYears(1)); 
                 insertTrest.Parameters.AddWithValue("@VezenID", vezenID);
 
-                // Provedení druhého příkazu
                 insertTrest.ExecuteNonQuery();
 
                 // Potvrzení transakce
@@ -55,6 +59,9 @@ namespace DatabaseSystem
             }
         }
 
+        /// <summary>
+        /// Vypíše všechny vězně, který jsou momentálně v databázi
+        /// </summary>
         public static string VypisVeznu(SqlConnection connection)
         {
             connection.Open();
@@ -91,6 +98,10 @@ namespace DatabaseSystem
 
             return result.ToString();
         }
+
+        /// <summary>
+        /// Smaže vězně společně i se souvisejícím trestem
+        /// </summary>
         public static void SmazVezne(SqlConnection connection, int id)
         {
             connection.Open();
@@ -109,6 +120,9 @@ namespace DatabaseSystem
             }
         }
 
+        /// <summary>
+        /// Upraví jméno vězně podle výběru uživatele
+        /// </summary>
         public static void UpravVezne(SqlConnection connection, string noveJmeno, int id)
         {
             connection.Open();

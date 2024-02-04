@@ -11,14 +11,21 @@ namespace DatabaseSystem
 {
     public class CSVimport
     {
+        /// <summary>
+        /// Načte uživatelem vybraný soubor CSV, který při správném zadání hodnot
+        /// přidá data ze souboru do tabulky
+        /// </summary>
+        /// <returns></returns>
         public static string Import(SqlConnection connection, string table, string file)
         {
             string filePath = "data/" + file;
 
+            // Kontroluje, zda soubor končí .csv
             if (!filePath.EndsWith(".csv"))
             {
                 return "Soubor musí mít příponu .csv\n";
             }
+            // Kontroluje, zda soubor existuje
             if (!File.Exists(filePath))
             {
                 return "Soubor neexistuje\n";
@@ -37,6 +44,7 @@ namespace DatabaseSystem
             {
                 using (StreamReader sr = new StreamReader(filePath))
                 {
+                    // Zde se načtou atributy pro výpis
                     string atributes = sr.ReadLine();
                     atributes.Trim();
 
